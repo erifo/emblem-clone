@@ -2,7 +2,7 @@ import sys, pygame
 from terrain import Terrain
 
 #Pixels
-CELL_SIZE = 40
+CELL_SIZE = 50
 WALL_WIDTH = 1
 
 #RGB
@@ -49,10 +49,13 @@ class GFX():
         for unit in self.board.units:
             y = self.originY + (unit.y * CELL_SIZE)
             x = self.originX + (unit.x * CELL_SIZE)
-            height =  CELL_SIZE
+            if unit.image != None:
+                self.screen.blit(unit.image, (x,y))
+                continue
+            height = CELL_SIZE
             width = CELL_SIZE
             pygame.draw.rect(self.screen, CELL_COLOR[Terrain.UNIT], [x, y, width, height])
-
+            
 
     def drawBoard(self):
             #Draw Background

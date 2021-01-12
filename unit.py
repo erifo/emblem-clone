@@ -7,4 +7,4 @@ class Unit():
         self.name = name
         self.factionID = factionID
         self.stats = Stats()
-        self.sprite = None
+        self.image = None

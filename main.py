@@ -1,4 +1,4 @@
-import sys, pygame
+import sys, pygame, os.path
 from board import Board
 from gfx import GFX
 from controls import Actions, translateActions
@@ -6,7 +6,7 @@ from player import Player
 from logic import Logic
     
 #Squares
-HEIGHT = 16
+HEIGHT = 14
 WIDTH = 16
 
 #Pixels
@@ -22,6 +22,11 @@ def main():
     board.units.append(player)
     logic = Logic() 
     gfx = GFX(board, player, ORIGIN_Y, ORIGIN_X)
+    
+    #MOVE THIS TO DISTINCT MODULE FOR ALL GFX LOADING.
+    player.image = pygame.image.load(os.path.join('images', 'c1.png')).convert_alpha()
+    player.image = pygame.transform.scale(player.image, (50, 50)) #Have this be the Cell Size from GFX module.
+    #----
 
     gfx.drawBoard() #Initial display
 
