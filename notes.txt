@@ -1,0 +1,10 @@
+Remember to setup the Windows PATH for
+	C:\Users\Xaio\AppData\Roaming\Python\Python39\Scripts
+	C:\Users\Xaio\AppData\Local\Programs\Python\Python39
+	C:\Users\Xaio\AppData\Local\Programs\Python\Python39\Scripts
+
+
+Using Pyinstaller to make execs is ezpz.
+Navigate cmd to .py directory and use command:
+	pyinstaller --onefile -w pythonScriptName.py
+The -w flag prevents the console from opening when exe is running.
