@@ -1,10 +1,13 @@
 from cell import Cell
+from terrain import Terrain
+
 
 class Board():
     def __init__(self, height, width):
         self.HEIGHT = height #cells
         self.WIDTH = width #cells
         self.cells = []
+        self.units = []
         self.generateCells()
         self.terraform()
     
@@ -22,7 +25,7 @@ class Board():
     def terraform(self):
         #Default to grasslands
         for cell in self.cells:
-            cell.type = "grass"
+            cell.type = Terrain.GRASS
 
         #Add L-shaped river
         for y in range(self.HEIGHT):
@@ -30,17 +33,24 @@ class Board():
                 break
             if y <= self.HEIGHT//3*2:
                 for x in range((self.WIDTH//2)-1, (self.WIDTH//2)+1):
-                    self.getCellAt(y,x).type = "water"
+                    c = self.getCellAt(y,x)
+                    c.type = Terrain.WATER
+                    c.passable = False
             else:
                 for x in range((self.WIDTH//2)-1, self.WIDTH):
-                    self.getCellAt(y,x).type = "water"
+                    c = self.getCellAt(y,x)
+                    c.type = Terrain.WATER
+                    c.passable = False
         
         #Add two bridges
         for y in range((self.HEIGHT//3)-2, self.HEIGHT//3):
             for x in range((self.WIDTH//2)-1, (self.WIDTH//2)+1):
-                self.getCellAt(y,x).type = "wood"
+                c = self.getCellAt(y,x)
+                c.type = Terrain.WOOD
+                c.passable = True
         
         for y in range((self.HEIGHT//3*2)+1, (self.HEIGHT//3*2)+3):
             for x in range((self.WIDTH//3*2)+2, (self.WIDTH//3*2)+4):
-                self.getCellAt(y,x).type = "wood"
-        
+                c = self.getCellAt(y,x)
+                c.type = Terrain.WOOD
+                c.passable = True

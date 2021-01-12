@@ -3,3 +3,4 @@ class Cell():
         self.y = y
         self.x = x
         self.type = None
+        self.passable = True
