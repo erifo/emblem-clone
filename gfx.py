@@ -1,18 +1,13 @@
 import sys, pygame
-from terrain import Terrain
+from assets import Assets, ImageTypes
 
 #Pixels
 CELL_SIZE = 50
 WALL_WIDTH = 1
 
 #RGB
-CELL_COLOR = {
-    Terrain.GRASS: (50,150,50),
-    Terrain.WATER: (50,50,150),
-    Terrain.WOOD: (101, 67, 33),
-    Terrain.UNIT: (200, 40, 40)
-}
 GRID_COLOR = (10,10,10)
+
 
 class GFX():
     def __init__(self, board, player, originY, originX):
@@ -22,6 +17,7 @@ class GFX():
         self.originX = originX
         self.screenSize = (self.board.WIDTH*CELL_SIZE)+10, (self.board.HEIGHT*CELL_SIZE)+10 #tuple
         self.screen = pygame.display.set_mode(self.screenSize)
+        self.assets = Assets()
 
     def drawCells(self):
         for cell in self.board.cells:
@@ -29,7 +25,9 @@ class GFX():
             x = self.originX + (cell.x * CELL_SIZE)
             height =  CELL_SIZE
             width = CELL_SIZE
-            pygame.draw.rect(self.screen, CELL_COLOR[cell.type], [x, y, width, height])
+            image = self.assets.images[cell.imageType]
+            image = pygame.transform.scale(image, (width, height))
+            self.screen.blit(image, (x,y))
 
     def drawGrid(self):
         for cell in self.board.cells:
@@ -49,12 +47,11 @@ class GFX():
         for unit in self.board.units:
             y = self.originY + (unit.y * CELL_SIZE)
             x = self.originX + (unit.x * CELL_SIZE)
-            if unit.image != None:
-                self.screen.blit(unit.image, (x,y))
-                continue
             height = CELL_SIZE
             width = CELL_SIZE
-            pygame.draw.rect(self.screen, CELL_COLOR[Terrain.UNIT], [x, y, width, height])
+            image = self.assets.images[unit.imageType]
+            image = pygame.transform.scale(image, (width, height))
+            self.screen.blit(image, (x,y))
             
 
     def drawBoard(self):

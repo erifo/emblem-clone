@@ -1,5 +1,5 @@
 from cell import Cell
-from terrain import Terrain
+from assets import ImageTypes
 
 
 class Board():
@@ -25,7 +25,7 @@ class Board():
     def terraform(self):
         #Default to grasslands
         for cell in self.cells:
-            cell.type = Terrain.GRASS
+            cell.imageType = ImageTypes.TILE_GRASS
 
         #Add L-shaped river
         for y in range(self.HEIGHT):
@@ -34,23 +34,23 @@ class Board():
             if y <= self.HEIGHT//3*2:
                 for x in range((self.WIDTH//2)-1, (self.WIDTH//2)+1):
                     c = self.getCellAt(y,x)
-                    c.type = Terrain.WATER
+                    c.imageType = ImageTypes.TILE_WATER
                     c.passable = False
             else:
                 for x in range((self.WIDTH//2)-1, self.WIDTH):
                     c = self.getCellAt(y,x)
-                    c.type = Terrain.WATER
+                    c.imageType = ImageTypes.TILE_WATER
                     c.passable = False
         
         #Add two bridges
         for y in range((self.HEIGHT//3)-2, self.HEIGHT//3):
             for x in range((self.WIDTH//2)-1, (self.WIDTH//2)+1):
                 c = self.getCellAt(y,x)
-                c.type = Terrain.WOOD
+                c.imageType = ImageTypes.TILE_WOOD
                 c.passable = True
         
         for y in range((self.HEIGHT//3*2)+1, (self.HEIGHT//3*2)+3):
             for x in range((self.WIDTH//3*2)+2, (self.WIDTH//3*2)+4):
                 c = self.getCellAt(y,x)
-                c.type = Terrain.WOOD
+                c.imageType = ImageTypes.TILE_WOOD
                 c.passable = True
