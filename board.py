@@ -1,6 +1,8 @@
+from random import randint
 from cell import Cell
 from assets import ImageTypes
 from player import Player
+from unit import Unit
 
 
 class Board():
@@ -12,6 +14,7 @@ class Board():
         self.units = []
         self.generateCells()
         self.terraform()
+        self.generateUnits()
     
     def generateCells(self):
         for y in range(self.HEIGHT):
@@ -23,6 +26,12 @@ class Board():
             if cell.y == y and cell.x == x:
                 return cell
         print("ERROR: Cell", y, x, "does not exist!")
+    
+    def isUnitAt(self, y, x):
+        for unit in self.units:
+            if unit.y == y and unit.x == x:
+                return True
+        return False
 
     def terraform(self):
         #Default to grasslands
@@ -55,3 +64,18 @@ class Board():
                 c = self.getCellAt(y,x)
                 c.imageType = ImageTypes.TILE_WOOD
                 c.passable = True
+    
+    def generateUnit(self):
+        while (True):
+            y = randint(0, self.HEIGHT-1)
+            x = randint(0, self.WIDTH-1)
+            if not self.getCellAt(y, x).passable:
+                continue
+            if self.isUnitAt(y, x):
+                continue
+            break
+        return Unit(y, x, "Bandit", 1, ImageTypes.UNIT_BANDIT)
+
+    def generateUnits(self):
+        for i in range(5): #Amount of Units to create.
+            self.units.append(self.generateUnit())
