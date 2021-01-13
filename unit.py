@@ -1,10 +1,13 @@
 from stats import Stats
+from element import Element
 
-class Unit():
-    def __init__(self, y, x, name, factionID):
-        self.y = y
-        self.x = x
+class Unit(Element):
+    def __init__(self, y, x, name, faction, imageType):
+        super().__init__(y, x, imageType)
         self.name = name
-        self.factionID = factionID
+        self.faction = faction
         self.stats = Stats()
-        self.image = None
+    
+    def move(self, yMod, xMod):
+        self.y += yMod
+        self.x += xMod

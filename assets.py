@@ -2,11 +2,12 @@ import os, pygame
 from enum import Enum
 
 class ImageTypes(Enum):
-    TILE_GRASS = 0
-    TILE_WATER = 1
-    TILE_WOOD = 2
-    UNIT_HERO = 3
-    UNIT_BANDIT = 4
+    NONE = 0
+    TILE_GRASS = 1
+    TILE_WATER = 2
+    TILE_WOOD = 3
+    UNIT_HERO = 4
+    UNIT_BANDIT = 5
 
 
 class Assets():
@@ -20,6 +21,7 @@ class Assets():
         self.images[imageType] = img
     
     def loadAllImages(self):
+        self.loadImagePNG(ImageTypes.NONE, "none.png")
         self.loadImagePNG(ImageTypes.TILE_GRASS, "grass.png")
         self.loadImagePNG(ImageTypes.TILE_WATER, "water.png")
         self.loadImagePNG(ImageTypes.TILE_WOOD, "wood.png")

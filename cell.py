@@ -1,6 +1,6 @@
-class Cell():
-    def __init__(self, y, x):
-        self.y = y
-        self.x = x
-        self.imageType = None
+from element import Element
+
+class Cell(Element):
+    def __init__(self, y, x, imageType):
+        super().__init__(y, x, imageType)
         self.passable = True

@@ -2,7 +2,6 @@ import sys, pygame, os.path
 from board import Board
 from gfx import GFX
 from controls import Actions, translateActions
-from player import Player
 from logic import Logic
 from assets import ImageTypes
     
@@ -19,10 +18,8 @@ def main():
     pygame.display.set_caption("Emblem Clone")
     
     board = Board(HEIGHT, WIDTH)
-    player = Player(2, 2, "Ratel", 0)
-    board.units.append(player)
     logic = Logic() 
-    gfx = GFX(board, player, ORIGIN_Y, ORIGIN_X)
+    gfx = GFX(board, ORIGIN_Y, ORIGIN_X)
 
     gfx.drawBoard() #Initial display
 
@@ -33,7 +30,7 @@ def main():
                 actions.append(translateActions(event))
             if (event.type == pygame.QUIT):
                 sys.exit()
-        logic.handleActions(actions, player, board)
+        logic.handleActions(actions, board)
         gfx.drawBoard()
 
 if __name__ == "__main__":

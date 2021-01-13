@@ -1,11 +1,13 @@
 from cell import Cell
 from assets import ImageTypes
+from player import Player
 
 
 class Board():
     def __init__(self, height, width):
         self.HEIGHT = height #cells
         self.WIDTH = width #cells
+        self.player = Player(2, 2, "Ratel", 0, ImageTypes.UNIT_HERO)
         self.cells = []
         self.units = []
         self.generateCells()
@@ -14,7 +16,7 @@ class Board():
     def generateCells(self):
         for y in range(self.HEIGHT):
             for x in range(self.WIDTH):
-                self.cells.append(Cell(y, x))
+                self.cells.append(Cell(y, x, ImageTypes.NONE))
     
     def getCellAt(self, y, x):
         for cell in self.cells:
@@ -48,7 +50,6 @@ class Board():
                 c = self.getCellAt(y,x)
                 c.imageType = ImageTypes.TILE_WOOD
                 c.passable = True
-        
         for y in range((self.HEIGHT//3*2)+1, (self.HEIGHT//3*2)+3):
             for x in range((self.WIDTH//3*2)+2, (self.WIDTH//3*2)+4):
                 c = self.getCellAt(y,x)
