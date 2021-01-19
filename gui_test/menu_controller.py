@@ -13,11 +13,11 @@ class MenuController():
                 elif (not model.active):
                     continue
                 elif (event.key == pygame.K_UP): #Move selection up
-                    model.generateMenuItems()
+                    model.selectPrevious()
                 elif (event.key == pygame.K_DOWN): #Move selection down
-                    pass
+                    model.selectNext()
                 elif (event.key == pygame.K_c): #Confirm
-                    pass
+                    model.generateMenuItems()
                 elif (event.key == pygame.K_x): #Cancel
                     pass
             if (event.type == pygame.QUIT):
