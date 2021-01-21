@@ -2,8 +2,6 @@
 *Disclaimer: Never actually played Fire Emblem, but it's the closest way I can think of summing this project up.*
 
 ### Todo
-* Gridbased board.
-* Unit movement.
 * Unit interaction.
 * Board switching.
 * Procedurally generated boards.
